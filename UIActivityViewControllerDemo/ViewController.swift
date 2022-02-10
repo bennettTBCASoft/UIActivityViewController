@@ -21,9 +21,25 @@ class ViewController: UIViewController {
     }
 
     @IBAction func Share(_ sender: UIButton) {
+        let activityVC = UIActivityViewController(activityItems: [image!,image!, nameLabel.text!, blogLabel.text!], applicationActivities: nil)
+        
+        activityVC.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, activityError: Error?) in
+            if activityError != nil {
+                self.showAlert(title: "Fail", message: "Error: \(activityError!.localizedDescription)")
+                return
+            }
+            
+            self.showAlert(title: "Success", message: "Share \(self.nameLabel.text!)'s information. ")
+        }
+        
+        present(activityVC, animated: true, completion: nil)
     
+    }
     
-    
+    func showAlert(title: String, message: String){
+        
+        
+        
     }
     
 }
